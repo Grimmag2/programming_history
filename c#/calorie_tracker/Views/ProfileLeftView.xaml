@@ -1,0 +1,1600 @@
+﻿<!--Authors: Dalibor Kalina-->
+    <UserControl x:Class="ITUvec.Views.ProfileLeftView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ITUvec.Views"
+             xmlns:viewModels="clr-namespace:ITUvec.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Border
+        BorderBrush="#294F27"
+        BorderThickness="10, 10, 10, 10"
+        Background="#DEF3E0"
+     >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="0.6*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--Profile picture-->
+                <Viewbox Grid.Column="0"  Grid.Row="1"  Margin="10"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                    <Canvas Width="100" Height="100">
+                        <Ellipse Fill="White" Width="100" Height="100">
+
+                        </Ellipse>
+                        <Ellipse Stroke="#82CF7E" StrokeThickness="4" Width="100" Height="100">
+                            <Ellipse.Fill>
+                                <ImageBrush Stretch="Uniform"
+                                    ImageSource="{Binding UserProfilePicture}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                    </Canvas>
+                </Viewbox>
+
+                <!--Name and age-->
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <!--Name-->
+                    <Viewbox Grid.Row="1" Grid.Column="0" Margin="10,0,0,0">
+                        <TextBlock
+                               FontSize="45"
+                               Text="{Binding UserNameTextBlock}"
+                               FontWeight="Bold"
+                               Foreground="#294F27"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                    />
+                    </Viewbox>
+
+                    <!--Age-->
+                    <Viewbox Grid.Row="2" Grid.Column="0" Margin="10,0,0,0" Height="40">
+                        <TextBlock
+                               FontSize="30"
+                               Text="{Binding UserAgeTextBlock}"
+                               Foreground="#294F27"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                    />
+                    </Viewbox>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.Column="2" Background="#294F27"/>
+
+                <!--Day streak-->
+                <Grid Grid.Row="0" Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.9*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--Fire icon-->
+                    <Image Grid.Row="0"
+                       Grid.Column="0" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Source="/ITUvec;component/images/streak.png"
+                       Margin="{Binding DaysStreakFireSize}"
+                    />
+                    <!--Day streak text-->
+                    <Viewbox Grid.Row="2" Grid.Column="0" Margin="20,0,20,3">
+                        <TextBlock Grid.Row="1" 
+                           Grid.Column="0"
+                           Text="{Binding DaysStreak}"
+                           FontSize="25"
+                           FontWeight="Bold"
+                           Foreground="#294F27"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                    />
+                    </Viewbox>
+                </Grid>
+                
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0" Background="#294F27"/>
+
+            
+            <Grid Grid.Row="3" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.02*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.02*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--Change to previous graph button-->
+                <Button Grid.Column="0" Grid.Row="0" Command="{Binding MoveGraphToLeftCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                    Margin="10"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border     
+                                x:Name="MoveGraphToLeftButton"
+                                BorderBrush="#82CF7E"
+                                Background="#82CF7E"
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                CornerRadius="8"
+                            >
+
+                                <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                    <Image HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Source="/ITUvec;component/images/Arrow_alt_left.png"/>
+                                </Viewbox>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="MoveGraphToLeftButton" Property="Background">
+                                        <Setter.Value>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#82CF7E" Offset="0" />
+                                                <GradientStop Color="#FF398239" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+
+                <!--GRAPHS-->
+                <Grid Grid.Row="0" Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                        <RowDefinition Height="0.3*"></RowDefinition>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="0.06*"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="0.04*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.04*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+
+                        <!--Decrease weight button-->
+                        <Button Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent"
+                                Command="{Binding MinusWeightCommand}"
+                                Visibility="{Binding WeightGraphVisibility}"
+                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                <Grid>
+                                    <Image 
+                                        Source="..\images\Remove_dark_red.png"
+                                    />
+                                </Grid>
+                            </Viewbox>
+    
+                        </Button>
+
+                        <!--Today weight-->
+                        <TextBox Name="WeightTextBox"
+                                 Visibility="{Binding WeightGraphVisibility}"
+                                 Grid.Row="0"
+                                 Grid.Column="2"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Stretch"
+                                 Margin="0,2,0,2"
+                                 FontSize="25"
+                                 Foreground="#294F27"
+                                 Text="{Binding WeightTextBoxText, UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 PreviewTextInput="NumberValidationTextBox">
+
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding ChangeWeightCommand}" />
+                            </TextBox.InputBindings>
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="8"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        
+                        <!--Increase weight button-->
+                        <Button Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent"
+                                Command="{Binding PlusWeightCommand}"
+                                Visibility="{Binding WeightGraphVisibility}"
+                                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                <Grid>
+                                    <Image 
+                                        Source="..\images\Add_ring_light_green.png"
+                                    />
+                                </Grid>
+                            </Viewbox>
+
+                        </Button>
+
+
+
+                        <!--Change time range to week button-->
+                        <Button Grid.Column="5" Grid.Row="0" Command="{Binding WeekRangeCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                            Margin="4,4,0,4" Visibility="{Binding TimeRangeButtonsColor[0]}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border     
+                                        x:Name="week1button"
+                                        BorderBrush="#82CF7E"
+                                        Background="#82CF7E"
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch"
+                                        CornerRadius="8,0,0,8"
+                                    >
+
+                                        <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                            <TextBlock Text="Týden" 
+                                                Margin="15,15,15,15"
+                                                FontSize="50"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"
+                                                />
+                                        </Viewbox>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="week1button" Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#82CF7E" Offset="0" />
+                                                        <GradientStop Color="#FF398239" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <!--change time range to month button-->
+                        <Button Grid.Column="6" Grid.Row="0" Command="{Binding MonthRangeCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                            Margin="0,4,0,4" Visibility="{Binding TimeRangeButtonsColor[2]}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border     
+                                        x:Name="month1button"
+                                        BorderBrush="#82CF7E"
+                                        Background="#82CF7E"
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch"
+                                    >
+
+                                        <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                            <TextBlock Text="Měsíc" 
+                                                Margin="15,15,15,15"
+                                                FontSize="50"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"
+                                                />
+                                        </Viewbox>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="month1button" Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#82CF7E" Offset="0" />
+                                                        <GradientStop Color="#FF398239" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <!--change time range to year button-->
+                        <Button Grid.Column="7" Grid.Row="0" Command="{Binding YearRangeCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                            Margin="0,4,4,4" Visibility="{Binding TimeRangeButtonsColor[4]}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border     
+                                        x:Name="year1button"
+                                        BorderBrush="#82CF7E"
+                                        Background="#82CF7E"
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch"
+                                        CornerRadius="0,8,8,0"
+                                    >
+                                        
+
+                                        <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                            <TextBlock Text="Rok" 
+                                                Margin="15,15,15,15"
+                                                FontSize="50"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"
+                                                />
+                                        </Viewbox>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="year1button" Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#82CF7E" Offset="0" />
+                                                        <GradientStop Color="#FF398239" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <!--disabled button for week-->
+                        <Button Grid.Column="5" Grid.Row="0" Command="{Binding WeekRangeCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                            Margin="4,4,0,4" Visibility="{Binding TimeRangeButtonsColor[1]}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border     
+                                        x:Name="weekbutton"
+                                        BorderBrush="#AFAFAF"
+                                        Background="#AFAFAF"
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch"
+                                        CornerRadius="8,0,0,8"
+                                    >
+
+                                        <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                            <TextBlock Text="Týden" 
+                                                Margin="15,15,15,15"
+                                                FontSize="50"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"
+                                                />
+                                        </Viewbox>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="weekbutton" Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#AFAFAF" Offset="0" />
+                                                        <GradientStop Color="#777777" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <!--disabled button for month-->
+                        <Button Grid.Column="6" Grid.Row="0" Command="{Binding MonthRangeCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                            Margin="0,4,0,4" Visibility="{Binding TimeRangeButtonsColor[3]}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border     
+                                        x:Name="monthbutton"
+                                        BorderBrush="#AFAFAF"
+                                        Background="#AFAFAF"
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch"
+                                    >
+
+                                        <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                            <TextBlock Text="Měsíc" 
+                                                Margin="15,15,15,15"
+                                                FontSize="50"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"
+                                                />
+                                        </Viewbox>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="monthbutton" Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#AFAFAF" Offset="0" />
+                                                        <GradientStop Color="#777777" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <!--disabled button for year-->
+                        <Button Grid.Column="7" Grid.Row="0" Command="{Binding YearRangeCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                            Margin="0,4,4,4" Visibility="{Binding TimeRangeButtonsColor[5]}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border     
+                                        x:Name="yearbutton"
+                                        BorderBrush="#AFAFAF"
+                                        Background="#AFAFAF"
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch"
+                                        CornerRadius="0,8,8,0"
+                                    >
+
+
+                                        <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                            <TextBlock Text="Rok" 
+                                                Margin="15,15,15,15"
+                                                FontSize="50"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"
+                                                />
+                                        </Viewbox>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="yearbutton" Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#AFAFAF" Offset="0" />
+                                                        <GradientStop Color="#777777" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                    </Grid>
+                </Grid>
+
+                <!--WEIGHT GRAPH-->
+                <Grid x:Name="WeightGraph" Grid.Row="0" Grid.Column="2" Visibility="{Binding WeightGraphVisibility}">
+                    <!--Visibility="{Binding WeightGraphVisibility}"-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                        <RowDefinition Height="0.3*"></RowDefinition>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Hmotnost v čase"
+                               FontSize="25"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="#294F27"
+                               />
+                    
+                    
+
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.07*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.8*"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <!--TEXTBLOCKS FOR DATES-->
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+
+                            
+                            <TextBlock Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatesArraySecond[0]}"
+                                       FontSize="22"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                            <TextBlock Grid.Column="1"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatesArraySecond[1]}"
+                                       FontSize="22"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                            <TextBlock Grid.Column="2"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatesArraySecond[2]}"
+                                       FontSize="22"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                            <TextBlock Grid.Column="3"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatesArraySecond[3]}"
+                                       FontSize="22"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                            <TextBlock Grid.Column="4"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatesArraySecond[4]}"
+                                       FontSize="22"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                            <TextBlock Grid.Column="5"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatesArraySecond[5]}"
+                                       FontSize="22"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                            <TextBlock Grid.Column="6"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatesArraySecond[6]}"
+                                       FontSize="22"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                        </Grid>
+
+                        <!--TEXTBLOCKS FOR Y AXIS-->
+                        <Grid Grid.Column="0" Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*"></RowDefinition>
+                                <RowDefinition Height="0.2*"></RowDefinition>
+                                <RowDefinition Height="0.2*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Top"
+                                       Text="{Binding TextWeight[0]}"
+                                       FontSize="25"
+                                       FontWeight="SemiBold"
+                                       Foreground="#294F27"
+                                       Margin="0,0,10,0"/>
+
+                            <TextBlock Grid.Row="2"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Bottom"
+                                       Text="{Binding TextWeight[1]}"
+                                       FontSize="25"
+                                       FontWeight="SemiBold"
+                                       Foreground="#294F27"
+                                       Margin="0,0,10,0"/>
+                        </Grid>
+
+                        <Border Grid.Row="0" Grid.Column="1" Background="White" CornerRadius="8">
+                            <Grid Grid.Column="1" x:Name="WeightGraph2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- GRAY LINES IN GRAPH-->
+                                <Canvas Grid.Row="0" Grid.Column="1">
+                                    <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=WeightGraph2, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Row="0" Grid.Column="2">
+                                    <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=WeightGraph2, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Row="0" Grid.Column="3">
+                                    <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=WeightGraph2, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Row="0" Grid.Column="4">
+                                    <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=WeightGraph2, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Row="0" Grid.Column="5">
+                                    <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=WeightGraph2, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Row="0" Grid.Column="6">
+                                    <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=WeightGraph2, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Row="0" Grid.Column="7">
+                                    <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=WeightGraph2, Path=ActualHeight}"/>
+                                </Canvas>
+
+
+                                <!--PARSING GRAPH TO SEGMENTS WITH BIND-->
+                                <Rectangle x:Name="A0" Grid.Row="0" Grid.Column="0" Grid.RowSpan="{Binding FirstStroke[0]}" Grid.ColumnSpan="1"/>
+                                <Rectangle x:Name="A1" Grid.Row="0" Grid.Column="0" Grid.RowSpan="{Binding FirstStroke[1]}" Grid.ColumnSpan="1"/>
+                                <Rectangle x:Name="A2" Grid.Row="0" Grid.Column="0" Grid.RowSpan="{Binding FirstStroke[2]}" Grid.ColumnSpan="2"/>
+                                <Rectangle x:Name="A3" Grid.Row="0" Grid.Column="0" Grid.RowSpan="{Binding FirstStroke[3]}" Grid.ColumnSpan="3"/>
+                                <Rectangle x:Name="A4" Grid.Row="0" Grid.Column="0" Grid.RowSpan="{Binding FirstStroke[4]}" Grid.ColumnSpan="4"/>
+                                <Rectangle x:Name="A5" Grid.Row="0" Grid.Column="0" Grid.RowSpan="{Binding FirstStroke[5]}" Grid.ColumnSpan="5"/>
+                                <Rectangle x:Name="A6" Grid.Row="0" Grid.Column="0" Grid.RowSpan="{Binding FirstStroke[6]}" Grid.ColumnSpan="6"/>
+                                <Rectangle x:Name="A7" Grid.Row="0" Grid.Column="0" Grid.RowSpan="{Binding FirstStroke[7]}" Grid.ColumnSpan="7"/>
+
+                                <!--CANVASES FOR LINES IN GRAPH-->
+                                <Canvas Grid.RowSpan="10" Grid.ColumnSpan="8">
+                                    <Line Stroke="#294F27"
+                                      StrokeThickness="5"
+                                      X1="1"
+                                      Y1="{Binding ElementName=A0, Path=ActualHeight}"
+                                      X2="{Binding ElementName=A1, Path=ActualWidth}"
+                                      Y2="{Binding ElementName=A1, Path=ActualHeight}"/>
+                                </Canvas>
+
+                                <Canvas Grid.RowSpan="10" Grid.ColumnSpan="8">
+                                    <Line Stroke="#294F27"
+                                      StrokeThickness="5"
+                                      X1="{Binding ElementName=A1, Path=ActualWidth}"
+                                      Y1="{Binding ElementName=A1, Path=ActualHeight}"
+                                      X2="{Binding ElementName=A2, Path=ActualWidth}"
+                                      Y2="{Binding ElementName=A2, Path=ActualHeight}"/>
+                                </Canvas>
+
+                                <Canvas Grid.RowSpan="10" Grid.ColumnSpan="8">
+                                    <Line Stroke="#294F27"
+                                      StrokeThickness="5"
+                                      X1="{Binding ElementName=A2, Path=ActualWidth}"
+                                      Y1="{Binding ElementName=A2, Path=ActualHeight}"
+                                      X2="{Binding ElementName=A3, Path=ActualWidth}"
+                                      Y2="{Binding ElementName=A3, Path=ActualHeight}"/>
+                                </Canvas>
+
+                                <Canvas Grid.RowSpan="10" Grid.ColumnSpan="8">
+                                    <Line Stroke="#294F27"
+                                      StrokeThickness="5"
+                                      X1="{Binding ElementName=A3, Path=ActualWidth}"
+                                      Y1="{Binding ElementName=A3, Path=ActualHeight}"
+                                      X2="{Binding ElementName=A4, Path=ActualWidth}"
+                                      Y2="{Binding ElementName=A4, Path=ActualHeight}"/>
+                                </Canvas>
+
+                                <Canvas Grid.RowSpan="10" Grid.ColumnSpan="8">
+                                    <Line Stroke="#294F27"
+                                      StrokeThickness="5"
+                                      X1="{Binding ElementName=A4, Path=ActualWidth}"
+                                      Y1="{Binding ElementName=A4, Path=ActualHeight}"
+                                      X2="{Binding ElementName=A5, Path=ActualWidth}"
+                                      Y2="{Binding ElementName=A5, Path=ActualHeight}"/>
+                                </Canvas>
+
+                                <Canvas Grid.RowSpan="10" Grid.ColumnSpan="8">
+                                    <Line Stroke="#294F27"
+                                      StrokeThickness="5"
+                                      X1="{Binding ElementName=A5, Path=ActualWidth}"
+                                      Y1="{Binding ElementName=A5, Path=ActualHeight}"
+                                      X2="{Binding ElementName=A6, Path=ActualWidth}"
+                                      Y2="{Binding ElementName=A6, Path=ActualHeight}"/>
+                                </Canvas>
+
+                                <Canvas Grid.RowSpan="10" Grid.ColumnSpan="8" Visibility="{Binding TodaysWeightIsGiven}">
+                                    <Line Stroke="#294F27"
+                                      StrokeThickness="5"
+                                      X1="{Binding ElementName=A6, Path=ActualWidth}"
+                                      Y1="{Binding ElementName=A6, Path=ActualHeight}"
+                                      X2="{Binding ElementName=A7, Path=ActualWidth}"
+                                      Y2="{Binding ElementName=A7, Path=ActualHeight}"/>
+                                </Canvas>
+
+
+
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                </Grid>
+
+                <!--STATS GRAPH (kcal..)-->
+                <Grid x:Name="StatsGraph" Grid.Row="0" Grid.Column="2" Visibility="{Binding StatsGraphVisibility}">
+                    <!--Visibility="{Binding StatsGraphVisibility}"-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                        <RowDefinition Height="0.3*"></RowDefinition>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <!--CHECKBOXES-->
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.01*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.01*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" 
+                                Grid.Column="1" 
+                                CornerRadius="8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{Binding KcalColor}"
+                                Visibility="{Binding KcalCheckBoxBackgroundVisibility}"
+                                >
+                            <CheckBox
+                                  Visibility="Hidden"
+                                  Content="Kalorie"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Margin="3"
+                                  >
+                                <CheckBox.LayoutTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                </CheckBox.LayoutTransform>
+                            </CheckBox>
+                        </Border>
+                        
+                        <CheckBox
+                                Grid.Row="0" 
+                                Grid.Column="1" 
+                                  IsChecked="{Binding KcalCheckBox}"
+                                  Content="Kalorie"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Foreground="{Binding KcalCheckBoxTextColor}"
+                                  >
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+
+                        <Border Grid.Row="0" 
+                                Grid.Column="2" 
+                                CornerRadius="8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{Binding TukyColor}"
+                                Visibility="{Binding TukyCheckBoxBackgroundVisibility}"
+                                >
+                            <CheckBox
+                                  Visibility="Hidden"
+                                  Content="Tuky"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Margin="3"
+                                  >
+                                <CheckBox.LayoutTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                </CheckBox.LayoutTransform>
+                            </CheckBox>
+                        </Border>
+                        <CheckBox
+                            Grid.Row="0" 
+                                Grid.Column="2" 
+                                  IsChecked="{Binding TukyCheckBox}"
+                                  Content="Tuky"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Foreground="{Binding TukyCheckBoxTextColor}"
+                                  >
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+
+                        <Border Grid.Row="0" 
+                                Grid.Column="3" 
+                                CornerRadius="8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{Binding SacharidyColor}"
+                                Visibility="{Binding SacharidyCheckBoxBackgroundVisibility}"
+                                >
+                            <CheckBox Margin="3"
+                                  Visibility="Hidden"
+                                  Content="Sacharidy"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  >
+                                <CheckBox.LayoutTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                </CheckBox.LayoutTransform>
+                            </CheckBox>
+                        </Border>
+
+                        <CheckBox Grid.Row="0" 
+                                Grid.Column="3" 
+                                
+                                  IsChecked="{Binding SacharidyCheckBox}"
+                                  Content="Sacharidy"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Foreground="{Binding SacharidyCheckBoxTextColor}"
+                                  >
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+
+                        <Border Grid.Row="0" 
+                                Grid.Column="4" 
+                                CornerRadius="8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{Binding BilkovinyColor}"
+                                Visibility="{Binding BilkovinyCheckBoxBackgroundVisibility}"
+                                >
+                            <CheckBox Margin="3"
+                                  Visibility="Hidden"
+                                  Content="Bílkoviny"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  >
+                                <CheckBox.LayoutTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                </CheckBox.LayoutTransform>
+                            </CheckBox>
+                        </Border>
+                        <CheckBox Grid.Row="0" 
+                                Grid.Column="4"
+                                Margin="3"
+                                  IsChecked="{Binding BilkovinyCheckBox}"
+                                  Content="Bílkoviny"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Foreground="{Binding BilkovinyCheckBoxTextColor}"
+                                  >
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+
+                    </Grid>
+
+
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <!--TEXTBLOCKS FOR Y AXIS-->
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.26*"></RowDefinition>
+                                <RowDefinition Height="0.26*"></RowDefinition>
+                                <RowDefinition Height="0.26*"></RowDefinition>
+                                <RowDefinition Height="0.15*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0"
+                                       Text="{Binding TextStats[0]}"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Top"
+                                       FontSize="17"
+                                       Foreground="#294F27"
+                                       Margin="0,0,10,0"
+                                       FontWeight="SemiBold"
+                                       />
+                            <TextBlock Grid.Row="1"
+                                       Text="{Binding TextStats[1]}"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       FontSize="17"
+                                       Foreground="#294F27"
+                                       Margin="0,0,10,0"
+                                       FontWeight="SemiBold"
+                                       />
+                            <TextBlock Grid.Row="2"
+                                       Text="0%"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="17"
+                                       Foreground="#294F27"
+                                       Margin="0,0,10,0"
+                                       FontWeight="SemiBold"
+                                       />
+                        </Grid>
+
+                        <!--TEXTBLOCKS FOR X AXIS-->
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.8*"></RowDefinition>
+                                <RowDefinition Height="0.15*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                       Text="{Binding DatesArray[0], UpdateSourceTrigger=PropertyChanged}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{Binding StatsDatesSize}"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                                <TextBlock Grid.Column="1"
+                                       Text="{Binding DatesArray[1], UpdateSourceTrigger=PropertyChanged}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{Binding StatsDatesSize}"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                                <TextBlock Grid.Column="2"
+                                       Text="{Binding DatesArray[2], UpdateSourceTrigger=PropertyChanged}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{Binding StatsDatesSize}"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                       />
+                                <TextBlock Grid.Column="3"
+                                       Text="{Binding DatesArray[3], UpdateSourceTrigger=PropertyChanged}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{Binding StatsDatesSize}"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                           />
+                                <TextBlock Grid.Column="4"
+                                       Text="{Binding DatesArray[4], UpdateSourceTrigger=PropertyChanged}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{Binding StatsDatesSize}"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                           />
+                                <TextBlock Grid.Column="5"
+                                       Text="{Binding DatesArray[5], UpdateSourceTrigger=PropertyChanged}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{Binding StatsDatesSize}"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                           />
+                                <TextBlock Grid.Column="6"
+                                       Text="{Binding DatesArray[6], UpdateSourceTrigger=PropertyChanged}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{Binding StatsDatesSize}"
+                                       Foreground="#294F27"
+                                       FontWeight="SemiBold"
+                                           />
+                            </Grid>
+
+
+                            <!--PARSING GRAPH TO SEGMENTS USING GRID AND BINDING ITS WIDTH-->
+                            <Border Grid.Row="0" Grid.Column="0" Background="White" CornerRadius="8">
+                                <Grid x:Name="CenterGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{Binding KcalColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding TukyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding SacharidyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding BilkovinyColumnWidth}"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding KcalColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding TukyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding SacharidyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding BilkovinyColumnWidth}"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="{Binding KcalColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding TukyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding SacharidyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding BilkovinyColumnWidth}"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="{Binding KcalColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding TukyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding SacharidyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding BilkovinyColumnWidth}"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="{Binding KcalColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding TukyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding SacharidyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding BilkovinyColumnWidth}"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="{Binding KcalColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding TukyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding SacharidyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding BilkovinyColumnWidth}"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="{Binding KcalColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding TukyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding SacharidyColumnWidth}"></ColumnDefinition>
+                                    <ColumnDefinition Width="{Binding BilkovinyColumnWidth}"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                
+                                <!--GRAY LINES IN GRAPH-->
+                                <Canvas Grid.Column="4" HorizontalAlignment="Center">
+                                    <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=CenterGrid, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Column="9" HorizontalAlignment="Center">
+                                        <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=CenterGrid, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Column="14" HorizontalAlignment="Center">
+                                        <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=CenterGrid, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Column="19" HorizontalAlignment="Center">
+                                        <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=CenterGrid, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Column="24" HorizontalAlignment="Center">
+                                        <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=CenterGrid, Path=ActualHeight}"/>
+                                </Canvas>
+                                <Canvas Grid.Column="29" HorizontalAlignment="Center">
+                                        <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" Y2="{Binding ElementName=CenterGrid, Path=ActualHeight}"/>
+                                </Canvas>
+
+                                    <Canvas Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+                                        <Line Stroke="LightGray" StrokeDashArray="2 2" StrokeDashOffset="10" X2="{Binding ElementName=CenterGrid, Path=ActualWidth}"/>
+                                    </Canvas>
+
+                                <!--KCAL COLUMNS-->
+                                    <Grid Grid.Row="0" Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding KcalRatioNegative[0]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding KcalRatio[0]}"></RowDefinition>
+                                     </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding KcalColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding KcalRatioNegative[1]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding KcalRatio[1]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding KcalColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding KcalRatioNegative[2]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding KcalRatio[2]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding KcalColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="15">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding KcalRatioNegative[3]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding KcalRatio[3]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding KcalColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding KcalRatioNegative[4]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding KcalRatio[4]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding KcalColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="25">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding KcalRatioNegative[5]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding KcalRatio[5]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding KcalColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="30">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding KcalRatioNegative[6]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding KcalRatio[6]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding KcalColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+
+                                    <!--FATS COLUMNS-->
+                                    <Grid Grid.Row="0" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TukyRatioNegative[0]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding TukyRatio[0]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding TukyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TukyRatioNegative[1]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding TukyRatio[1]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding TukyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="11">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TukyRatioNegative[2]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding TukyRatio[2]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding TukyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="16">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TukyRatioNegative[3]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding TukyRatio[3]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding TukyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="21">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TukyRatioNegative[4]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding TukyRatio[4]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding TukyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="26">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TukyRatioNegative[5]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding TukyRatio[5]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding TukyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="31">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding TukyRatioNegative[6]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding TukyRatio[6]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding TukyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+
+                                    <!--CARBOHYDRATES COLUMNS-->
+                                    <Grid Grid.Row="0" Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding SacharidyRatioNegative[0]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding SacharidyRatio[0]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding SacharidyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="7">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding SacharidyRatioNegative[1]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding SacharidyRatio[1]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding SacharidyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="12">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding SacharidyRatioNegative[2]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding SacharidyRatio[2]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding SacharidyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="17">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding SacharidyRatioNegative[3]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding SacharidyRatio[3]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding SacharidyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="22">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding SacharidyRatioNegative[4]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding SacharidyRatio[4]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding SacharidyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="27">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding SacharidyRatioNegative[5]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding SacharidyRatio[5]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding SacharidyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="32">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding SacharidyRatioNegative[6]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding SacharidyRatio[6]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding SacharidyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+
+                                    <!--PROTEINS COLUMNS-->
+                                    <Grid Grid.Row="0" Grid.Column="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding BilkovinyRatioNegative[0]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding BilkovinyRatio[0]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding BilkovinyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="8">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding BilkovinyRatioNegative[1]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding BilkovinyRatio[1]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding BilkovinyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="13">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding BilkovinyRatioNegative[2]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding BilkovinyRatio[2]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding BilkovinyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="18">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding BilkovinyRatioNegative[3]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding BilkovinyRatio[3]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding BilkovinyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="23">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding BilkovinyRatioNegative[4]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding BilkovinyRatio[4]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding BilkovinyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="28">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding BilkovinyRatioNegative[5]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding BilkovinyRatio[5]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding BilkovinyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+                                <Grid Grid.Row="0" Grid.Column="33">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{Binding BilkovinyRatioNegative[6]}"></RowDefinition>
+                                        <RowDefinition Height="{Binding BilkovinyRatio[6]}"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="1" Background="{Binding BilkovinyColor}" CornerRadius="6,6,0,0"/>
+                                </Grid>
+
+                            </Grid>
+                                
+                            </Border>
+                            
+                            
+
+                        </Grid>
+                        
+                        
+                        
+                    </Grid>
+
+                </Grid>
+
+
+                <!--FAVORITE FOOD GRAPH-->
+                <Grid x:Name="FoodGraph" Grid.Row="0" Grid.Column="2" Visibility="{Binding FoodGraphVisibility}" Height="252" VerticalAlignment="Top">
+                    <!--Visibility="{Binding FoodGraphVisibility}"-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                        <RowDefinition Height="0.3*"></RowDefinition>
+                        <RowDefinition Height="0.05*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <!--NAME OF GRAPH-->
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Oblíbené pokrmy"
+                               FontSize="25"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="#294F27"
+                               />
+
+
+
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.07*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.15*"></RowDefinition>
+                            <RowDefinition Height="0.01*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <!--TEXTBLOCKS FOR Y AXIS-->
+                        <Grid Grid.Row="0"
+                              Grid.Column="0"
+                              >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.04*"></RowDefinition>
+                                <RowDefinition Height="0.1*"></RowDefinition>
+                                <RowDefinition Height="0.04*"></RowDefinition>
+                                <RowDefinition Height="0.1*"></RowDefinition>
+                                <RowDefinition Height="0.04*"></RowDefinition>
+                                <RowDefinition Height="0.1*"></RowDefinition>
+                                <RowDefinition Height="0.04*"></RowDefinition>
+                                <RowDefinition Height="0.1*"></RowDefinition>
+                                <RowDefinition Height="0.04*"></RowDefinition>
+                                <RowDefinition Height="0.1*"></RowDefinition>
+                                <RowDefinition Height="0.04*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock  Grid.Row="1"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodNames[0]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="#294F27"
+                                           Margin="0,0,10,0"
+                                           />
+                            <TextBlock  Grid.Row="3"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodNames[1]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="#294F27"
+                                           Margin="0,0,10,0"
+                                           />
+                            <TextBlock  Grid.Row="5"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodNames[2]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="#294F27"
+                                           Margin="0,0,10,0"
+                                           />
+                            <TextBlock  Grid.Row="7"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodNames[3]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="#294F27"
+                                           Margin="0,0,10,0"
+                                           />
+                            <TextBlock  Grid.Row="9"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodNames[4]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="#294F27"
+                                           Margin="0,0,10,0"
+                                           />
+                        </Grid>
+                        
+
+                        <Border Grid.Row="0" Grid.Column="1" Background="White" CornerRadius="8">
+                            <Grid Grid.Column="1" x:Name="FoodGraph2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.04*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.04*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.04*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.04*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.04*"></RowDefinition>
+                                    <RowDefinition Height="0.1*"></RowDefinition>
+                                    <RowDefinition Height="0.04*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+
+                                <!--FIRST ROW ON GRAPH = 1. favorite food-->
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidth[0]}"></ColumnDefinition>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidthNegative[0]}"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="{Binding FoodColor[0]}" CornerRadius="0,10,10,0"/>
+                                    <TextBlock
+                                           Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodCount[0]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="White"
+                                           Margin="0,0,10,0"
+                                           />
+                                </Grid>
+                                <!--SECOND ROW ON GRAPH = 2. favorite food-->
+                                <Grid Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidth[1]}"></ColumnDefinition>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidthNegative[1]}"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="{Binding FoodColor[1]}" CornerRadius="0,10,10,0"/>
+                                    <TextBlock
+                                           Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodCount[1]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="White"
+                                           Margin="0,0,10,0"
+                                           />
+                                </Grid>
+                                <!--THIRD ROW ON GRAPH = 3. favorite food-->
+                                <Grid Grid.Row="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidth[2]}"></ColumnDefinition>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidthNegative[2]}"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="{Binding FoodColor[2]}" CornerRadius="0,10,10,0"/>
+                                    <TextBlock
+                                           Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodCount[2]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="White"
+                                           Margin="0,0,10,0"
+                                           />
+                                </Grid>
+                                <!--FOURTH ROW ON GRAPH = 4. favorite food-->
+                                <Grid Grid.Row="7">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidth[3]}"></ColumnDefinition>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidthNegative[3]}"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="{Binding FoodColor[3]}" CornerRadius="0,10,10,0"/>
+                                    <TextBlock
+                                           Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodCount[3]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="White"
+                                           Margin="0,0,10,0"
+                                           />
+                                </Grid>
+                                <!--FIFTH ROW ON GRAPH = 5. favorite food-->
+                                <Grid Grid.Row="9">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidth[4]}"></ColumnDefinition>
+                                        <ColumnDefinition Width="{Binding FoodColumnWidthNegative[4]}"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="{Binding FoodColor[4]}" CornerRadius="0,10,10,0"/>
+                                    <TextBlock
+                                           Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding FoodCount[4]}"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           Foreground="White"
+                                           Margin="0,0,10,0"
+                                           />
+                                </Grid>
+
+                                
+
+
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                </Grid>
+
+                <!--Change graph to the next one-->
+                <Button Grid.Column="5" Grid.Row="0" Command="{Binding MoveGraphToRightCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                        Margin="10"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border     
+                                x:Name="MoveGraphToRightButton"
+                                BorderBrush="#82CF7E"
+                                Background="#82CF7E"
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                CornerRadius="8"
+                            >
+
+                                <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                    <Image HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Source="/ITUvec;component/images/Arrow_alt_lright.png"/>
+                                </Viewbox>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="MoveGraphToRightButton" Property="Background">
+                                        <Setter.Value>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#82CF7E" Offset="0" />
+                                                <GradientStop Color="#FF398239" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,190 @@
+﻿<!--Authors: Dalibor Kalina-->
+    <UserControl x:Class="ITUvec.Views.SettingsRightView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ITUvec.Views"
+             xmlns:viewModels="clr-namespace:ITUvec.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="770" d:DesignWidth="360">
+
+    <Border
+        BorderBrush="#294F27"
+        BorderThickness="10,10,10,10"
+        Background="#DEF3E0"
+    >
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.6*"></RowDefinition>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="25"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--Profile picture-->
+                <Viewbox Grid.Column="1"  Grid.Row="1" 
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                    <Canvas Width="100" Height="100">
+                        <Ellipse Fill="White" Width="100" Height="100">
+
+                        </Ellipse>
+                        <Ellipse Stroke="#82CF7E" StrokeThickness="4" Width="100" Height="100">
+                            <Ellipse.Fill>
+                                <ImageBrush Stretch="Uniform"
+                                    ImageSource="{Binding ProfilePicture}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                    </Canvas>
+                </Viewbox>
+            </Grid>
+
+            <!--Edit profile picture button-->
+            <Button Grid.Column="1" Grid.Row="1" Command="{Binding EditProfilePictureCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                    Margin="25,15,25,15"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border     
+                                x:Name="EditProfilePictureButton"
+                                BorderBrush="#82CF7E"
+                                Background="#82CF7E"
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                CornerRadius="8"
+                            >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Viewbox Grid.Column="0" StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Right">
+                                    <Image HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="100"
+                                           Source="/ITUvec;component/images/Edit_Picture_Icon.png"/>
+                                </Viewbox>
+                                <Viewbox Grid.Column="1" StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
+                                    <TextBlock Text="Upravit obrázek" 
+                                    Margin="15,15,15,15"
+                                    FontSize="50"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Foreground="White"
+                                    />
+                                </Viewbox>
+                            </Grid>
+                            
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="EditProfilePictureButton" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#82CF7E" Offset="0" />
+                                            <GradientStop Color="#FF398239" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--Name-->
+            <Grid Grid.Row="3" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Text="Jméno"
+                           FontSize="30"
+                           FontWeight="SemiBold"
+                           Foreground="#294F27"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                />
+
+                <TextBox Name="NameTextBox"
+                         Grid.Row="0"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"
+                         Width="180"
+                         Height="50"
+                         FontSize="28"
+                         Foreground="#294F27"
+                         Text="{Binding NameTextBoxText}"
+                         TextChanged="NameTextBox_TextChanged"
+                >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </Grid>
+
+            <!--Surname-->
+            <Grid Grid.Row="4" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Text="Příjmení"
+                           FontSize="30"
+                           FontWeight="SemiBold"
+                           Foreground="#294F27"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                />
+
+                <TextBox Name="SurnameTextBox"
+                         Grid.Row="0"
+                         Grid.Column="1"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"
+                         Width="180"
+                         Height="50"
+                         FontSize="28"
+                         Foreground="#294F27"
+                         Text="{Binding SurnameTextBoxText}"
+                         TextChanged="SurnameTextBox_TextChanged"
+                         >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </Grid>
+
+        </Grid>  
+        
+    </Border>
+</UserControl>

@@ -1,0 +1,158 @@
+﻿<!--Authors: Dalibor Kalina-->
+    <UserControl x:Class="ITUvec.Views.ProfileMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ITUvec.Views" 
+             xmlns:db="clr-namespace:ITUvec.Database" 
+             xmlns:viewModels="clr-namespace:ITUvec.ViewModels" 
+             mc:Ignorable="d"
+             Background="#383838"
+             d:DesignHeight="77" d:DesignWidth="840">
+    <Border 
+        BorderBrush="#294F27"
+        BorderThickness="10, 10, 10, 0"
+        Background="#DEF3E0"
+    >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--Navigate to Main Button-->
+            <Button Grid.Column="0" Grid.Row="0" Command="{Binding NavigateToMainCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                    Margin="5" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border     
+                                x:Name="BackButton"
+                                BorderBrush="#82CF7E"
+                                Background="#82CF7E"
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                CornerRadius="8"
+                            >
+                            <Grid>
+                                <Image Margin="5, 0, 0, 0"
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Center"
+                                    Source="/ITUvec;component/images/Arrow_alt_left.png"
+                                    />
+                                <Viewbox StretchDirection="DownOnly" Stretch="Uniform" Margin="20,0,0,0">
+                                    <TextBlock Text="Zpět" 
+                                    Margin="0,5,0,5"
+                                    FontSize="50"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Foreground="White"
+                                    />
+                                </Viewbox>
+                            </Grid>
+                            
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BackButton" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#82CF7E" Offset="0" />
+                                            <GradientStop Color="#FF398239" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--Share Button-->
+            <Button Grid.Column="2" Grid.Row="0" Command="{Binding ShareButtonCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                    Margin="5" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border     
+                                x:Name="ShareButton"
+                                BorderBrush="#82CF7E"
+                                Background="#82CF7E"
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                CornerRadius="8"
+                            >
+
+                            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+
+                                <Image Source="/ITUvec;component/images/Share_Icon.png"
+                                       Margin="25"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                    />
+                            </Viewbox>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ShareButton" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#82CF7E" Offset="0" />
+                                            <GradientStop Color="#FF398239" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--Navigate to Setting button-->
+            <Button Grid.Column="4" Grid.Row="0" Command="{Binding NavigateToSettingsCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                    Margin="5" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border     
+                                x:Name="SettingsButton"
+                                BorderBrush="#82CF7E"
+                                Background="#82CF7E"
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                CornerRadius="8"
+                            >
+
+                            <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+
+                                <Image Source="/ITUvec;component/images/Settings_Cog.png"
+                                       Margin="25"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                    />
+                            </Viewbox>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="SettingsButton" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#82CF7E" Offset="0" />
+                                            <GradientStop Color="#FF398239" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+    </Border>
+</UserControl>

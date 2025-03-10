@@ -1,0 +1,14 @@
+<?php declare(strict_types=1);
+function fun_A(int $x) : int {
+	if ($x){fun_B($x);}
+	else {$x = $x + 1;fun_B($x);}
+	return $x;
+}
+ 
+fun_A(5);
+
+function fun_B(int $x) : int {
+	if (!$x){fun_A($x);}
+	else {$x = $x - 1;fun_A($x);}
+	return $x;
+}

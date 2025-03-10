@@ -1,0 +1,213 @@
+﻿<!--Authors: Dalibor Kalina-->
+    <UserControl x:Class="ITUvec.Views.ProfileRightView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ITUvec.Views"
+             xmlns:viewModels="clr-namespace:ITUvec.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="770" d:DesignWidth="360">
+
+    <Border
+        BorderBrush="#294F27"
+        BorderThickness="10,10,10,10"
+        Background="#DEF3E0"
+    >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.04*"></RowDefinition>
+                <RowDefinition Height="0.4*"></RowDefinition>
+                <RowDefinition Height="0.07*"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="0.64*"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <!--Trophy image-->
+            <Image Grid.Row="1"
+                   Grid.Column="0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Source="/ITUvec;component/images/Trophy Cup.png"
+            />
+
+            <!--Count of achieved achievements-->
+            <Viewbox Grid.Row="2" Grid.Column="0" Margin="20,0,20,3">
+                <TextBlock
+                       Text="{Binding AchievementsCountTextBlockText}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#294F27"
+                       FontSize="25"
+                       FontWeight="Bold"
+            />
+            </Viewbox>
+
+            <!--Dark green lines-->
+            <Grid Grid.Row="3" Grid.Column="0" Background="#294F27"/>
+            <Grid Grid.Row="5" Grid.Column="0" Background="#294F27"/>
+
+            <!--List of 4 Achievements-->
+            <Grid Grid.Row="4" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="0.05*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.9*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--First achievement-->
+                <Border Grid.Row="1" Grid.Column="1" Background="#D3EACF" CornerRadius="8">
+                    <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="20,10,20,10" HorizontalAlignment="Left"
+                               Text="{Binding AchievementTextBlockText1}"
+                               FontSize="25"
+                               VerticalAlignment="Center"
+                                FontWeight="SemiBold"
+                    />
+
+                        <Image HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="{Binding AchievementImage1}"
+                           Margin="5"
+                    />
+                </Grid>
+                </Border>
+
+                <!--Second achievement-->
+                <Border Grid.Row="3" Grid.Column="1" Background="#D3EACF" CornerRadius="8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="20,10,20,10"
+                               Text="{Binding AchievementTextBlockText2}"
+                               FontSize="25"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                                FontWeight="SemiBold"
+                    />
+                        <Image HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="{Binding AchievementImage2}"
+                           Margin="5"
+                    />
+                    </Grid>
+                </Border>
+
+                <!--Third achievement-->
+                <Border Grid.Row="5" Grid.Column="1" Background="#D3EACF" CornerRadius="8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="20,10,20,10"
+                               Text="{Binding AchievementTextBlockText3}"
+                               FontSize="25"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                            FontWeight="SemiBold"
+                    />
+                        <Image HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="{Binding AchievementImage3}"
+                           Margin="5"
+                    />
+                    </Grid>
+                </Border>
+
+                <!--fourth achievement-->
+                <Border Grid.Row="7" Grid.Column="1" Background="#D3EACF" CornerRadius="8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="20,10,20,10"
+                               Text="{Binding AchievementTextBlockText4}"
+                               FontSize="25"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                                FontWeight="SemiBold"
+                    />
+                        <Image HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="{Binding AchievementImage4}"
+                           Margin="5"
+                    />
+                    </Grid>
+                </Border>
+                
+                
+            </Grid>
+
+            <!--Navigate to achievements button-->
+            <Button Grid.Column="0" Grid.Row="6" Command="{Binding NavigateToAchievementsCommand}" CommandParameter="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                    Margin="5" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border     
+                                x:Name="achievButton"
+                                BorderBrush="#82CF7E"
+                                Background="#82CF7E"
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch"
+                                CornerRadius="8"
+                            >
+
+
+                            <Viewbox Grid.Column="2" StretchDirection="DownOnly" Stretch="Uniform">
+                                <TextBlock Text="Detaily odměn" 
+                                        Margin="15,15,15,15"
+                                        FontSize="50"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        />
+                            </Viewbox>
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="achievButton" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#82CF7E" Offset="0" />
+                                            <GradientStop Color="#FF398239" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+        
+        
+        
+    </Border>
+</UserControl>

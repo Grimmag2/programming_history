@@ -1,0 +1,6 @@
+<?php declare(strict_types=1);
+function fun(int $x) : void {
+	return;
+}
+ 
+if (fun(5)){return;}else{return;}

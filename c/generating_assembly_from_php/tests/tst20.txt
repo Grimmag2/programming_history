@@ -1,0 +1,4 @@
+<?php declare(strict_types=1);
+function chr(int $a) : void {return 4;}
+function ord(int $a) : void {return 5;}
+write(ord(chr(ord(chr(ord(chr(5)))))));

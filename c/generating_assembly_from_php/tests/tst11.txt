@@ -1,0 +1,5 @@
+<?php declare(strict_types=1);
+function abshodnota(int $x) : int{
+	if ($x < 0){return $x;}else{if($x > 0) {return -$x;}}
+}
+write(abshodnota(-5));

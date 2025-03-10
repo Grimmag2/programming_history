@@ -1,0 +1,61 @@
+﻿<!--Authors: Dalibor Kalina-->
+    <UserControl x:Class="ITUvec.Views.AchievementsRightView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ITUvec.Views"
+             xmlns:viewModels="clr-namespace:ITUvec.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="770" d:DesignWidth="360">
+
+    <Border
+        BorderBrush="#294F27"
+        BorderThickness="10,10,10,10"
+        Background="#DEF3E0"
+    >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.3*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--Trophy image-->
+            <Image Grid.Row="1"
+                   Grid.Column="0"
+                   Source="/ITUvec;component/images/Trophy Cup.png"
+            />
+
+            <!--Count of finished achievements-->
+            <Viewbox Grid.Row="2" Grid.Column="0" Margin="8,0,8,0">
+                <TextBlock
+                       Text="{Binding AchievementsCountTextBlockText}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#294F27"
+                       FontSize="45"
+                       FontWeight="ExtraBold"
+            />
+            </Viewbox>
+
+            <!--Apricientive sentence under achievements count-->
+            <Viewbox Grid.Row="3" Grid.Column="0"  Margin="8,0,8,0">
+            <StackPanel Orientation="Vertical" Width="300">
+                <TextBlock Text="{Binding AchievementsSentenceTextBlockText}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#294F27"
+                       FontSize="25"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       
+                />
+            </StackPanel>
+            </Viewbox>
+        </Grid>  
+        
+    </Border>
+</UserControl>

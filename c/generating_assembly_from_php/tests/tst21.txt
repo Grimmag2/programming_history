@@ -1,0 +1,4 @@
+<?php declare(strict_types=1);
+$string = "Shrek is Love, Shrek is Life";
+$string = substring($string, 15, strlen($string) + 1);
+write($string);

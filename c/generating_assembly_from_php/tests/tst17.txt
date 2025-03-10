@@ -1,0 +1,9 @@
+<?php declare(strict_types=1);
+$a = 300;
+$b = 1;
+while ($a !== 0) {
+    $b = $b * 0.1;
+    $a = $a - 1;
+}
+$x = 1 - $b;
+if ($x === 1){write($x);}else{return;}

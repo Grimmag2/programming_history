@@ -1,0 +1,6 @@
+<?php declare(strict_types=1);
+function fun(int $x) : void {
+	fun($x);
+	return;
+}
+fun(5);

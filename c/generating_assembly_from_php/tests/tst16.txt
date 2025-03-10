@@ -1,0 +1,8 @@
+<?php declare(strict_types=1);
+
+$x = 3;
+while($x){
+    $x = $x - 1;
+    function fun() : void {echo 5;}}
+fun();
+

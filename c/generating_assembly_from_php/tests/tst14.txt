@@ -1,0 +1,8 @@
+<?php declare(strict_types=1);
+
+$x = 5;
+if ($x === 5){
+    function fun() : void {write("5");}}
+else {
+    function fun() : void {write("not 5");}}
+fun();
